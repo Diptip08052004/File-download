@@ -14,6 +14,12 @@ public class Attachment {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid",strategy = "uuid2")
     private String id;
+    private String fileName;
+    private  String fileType;
+
+    @Lob
+    @Column(length = 65555)
+    private byte[] data;
 
     public Attachment(String fileName, String fileType, byte[] data) {
         this.fileName = fileName;
@@ -21,10 +27,16 @@ public class Attachment {
         this.data = data;
     }
 
-    private String fileName;
-    private  String fileType;
+    @Column(nullable = false)
+    private long fileSize;
 
-    @Lob
-    @Column(length = 65555)
-    private byte[] data;
+    public void setFileSize(long fileSize){
+        this.fileSize=fileSize;
+    }
+
+    public long getFileSize(){
+        return data.length;
+    }
+
+
 }
